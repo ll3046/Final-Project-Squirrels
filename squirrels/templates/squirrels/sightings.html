@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+    <body>
+	<b>
+		<a href="{% url 'squirrels:add' %}">Add a new sighting</a>
+	</b>
+	<table>
+		<tr>
+			<th>Link to Detail Page</th>
+			<th>Unique Squirrel ID</th>
+			<th>Date</th>
+		</tr>
+		{% for sighting in sightings %}
+		<tr> 
+			<td>
+			  <li>
+		 	    <a href="{% url 'squirrels:detail' sighting.id %}">{{ sighting.id }}</a>
+			  </li>
+			</td>
+			<td>{{ sighting.sq_id }}</td>
+			<td>{{ sighting.Date }}</td>
+		</tr>
+		{% endfor %}
+	</table>
+	</body>
+</html>
