@@ -16,7 +16,7 @@ def sightings(request):
     context = {
             'sightings': sightings,
     }
-    return render(request,'squirrels/testview.html', context)
+    return render(request,'squirrels/sightings.html', context)
 
 def detail(request, sighting_id):
     sighting = get_object_or_404(SquirrelDB, pk=sighting_id)
