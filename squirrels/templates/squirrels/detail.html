@@ -1,7 +1,17 @@
 <!doctype html>
 <html>
     <body>
-     - {{ sighting.id }}
-     - {{ sighting.sq_id }}
+    <form method="POST">
+        {% csrf_token %}
+    <table>
+        <tr><td>Sighting ID: </td><td>{{ sighting.id }}</td></tr>
+     <tr><td>Squirrel ID: </td><td>{{ sighting.sq_id }}</td></tr>
+     <tr><td>Latitude & Longitude</td><td><input type="text" name="Lat_long_id" size="50" value="{{sighting.Lat_long}}"/></td></tr>
+     <tr><td>Shift</td><td><input type="text" name="Shift_id" value="{{sighting.Shift}}"/></td></tr>
+     <tr><td>Date</td><td><input type="text" name="Date_id" value="{{sighting.Date}}"/></td></tr>
+     <tr><td>Age</td><td><input type="text" name="Age_id" value="{{sighting.Age}}"/></td></tr>
+    </table>
+    <input type="submit" name="submit_id" value="Update" /> <input type="submit" name="submit_id" value="Cancel" />
+        </form>
     </body>
 </html>
