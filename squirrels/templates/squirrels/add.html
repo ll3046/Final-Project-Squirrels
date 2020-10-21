@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+    <body>
+    <form method="POST">
+        {% csrf_token %}
+    <table>
+     <tr><td>Squirrel ID: </td><td><input type="text" name="sighting_sq_id" size="5"/></td></tr>
+     <tr><td>Longitude</td><td><input type="text" name="long_id" size="50"/></td></tr>
+        <tr><td>Latitude</td><td><input type="text" name="lat_id" size="50"/></td></tr>
+     <tr><td>Shift</td><td><input type="text" name="Shift_id"/></td></tr>
+     <tr><td>Date</td><td><input type="text" name="Date_id"/></td></tr>
+     <tr><td>Age</td><td><input type="text" name="Age_id"/></td></tr>
+    </table>
+    <input type="submit" name="submit_id" value="Save" /> <input type="submit" name="submit_id" value="Cancel" />
+        </form>
+    </body>
+</html>
