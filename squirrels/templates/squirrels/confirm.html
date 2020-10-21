@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+    <body>
+    <a href="/sightings/add"> Add new Sighting </a> <br />
+    <a href="/sightings"> View All Sightings</a> <br />
+    <hr color="RED"/>
+    <b>
+        The following data {{ status }} successfully.
+    </b>
+    <table>
+        <tr><td>Sighting ID: </td><td>{{ sighting.id }}</td></tr>
+     <tr><td>Squirrel ID: </td><td>{{ sighting.sq_id }}</td></tr>
+     <tr><td>Longitude</td><td>{{sighting.X}}</td></tr>
+        <tr><td>Latitude</td><td>{{sighting.Y}}</td></tr>
+     <tr><td>Shift</td><td>{{sighting.Shift}}</td></tr>
+     <tr><td>Date</td><td>{{sighting.Date}}</td></tr>
+     <tr><td>Age</td><td>{{sighting.Age}}</td></tr>
+    </table>
+
+    </body>
+</html>

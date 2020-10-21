@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
     <body>
-    <form method="POST">
+    <form method="POST" action="/sightings/update/">
         {% csrf_token %}
     <table>
         <tr><td>Sighting ID: </td><td>{{ sighting.id }}</td></tr>

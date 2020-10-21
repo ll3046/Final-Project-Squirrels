@@ -23,8 +23,16 @@ def sightings(request):
 
 def detail(request, sighting_id):
     sighting = get_object_or_404(SquirrelDB, pk=sighting_id)
+
+    context = {
+            'sighting': sighting,
+    }
+    return render(request, 'squirrels/detail.html', context)
+
+
+def update(request):
+    sighting = SquirrelDB()
     if request.method == "POST" and request.POST.get('submit_id') == "Update":
-        #print(request.POST.get('Shift_id'))
         sighting.Shift = request.POST.get('Shift_id')
         sighting.X = request.POST.get('long_id')
         sighting.Y = request.POST.get('lat_id')
@@ -33,14 +41,10 @@ def detail(request, sighting_id):
         sighting.Age = request.POST.get('Age_id')
         sighting.save()
     context = {
-            'sighting': sighting,
+        'sighting': sighting, "status": "Updated"
     }
-    return render(request, 'squirrels/detail.html', context)
+    return render(request, 'squirrels/confirm.html', context)
 
-
-def update(request):
-
-    return HttpResponse('updates page')
 
 def add(request):
     if request.method == "POST":
@@ -67,6 +71,10 @@ def add(request):
         sighting.Indifferent = False
         sighting.Runs_from = False
         sighting.save()
+        context = {
+            'sighting': sighting, "status": "Saved"
+        }
+        return render(request, 'squirrels/confirm.html', context)
     else:
         sighting = SquirrelDB()
     context = {
@@ -74,6 +82,7 @@ def add(request):
     }
 
     return render(request, 'squirrels/add.html', context)
+
 
 def stats(request):
     return HttpResponse('stats page')
