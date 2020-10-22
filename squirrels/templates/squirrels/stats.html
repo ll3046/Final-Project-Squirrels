@@ -1,8 +1,10 @@
-    {% load static %}
-<head>
-    <link rel="stylesheet" href="{% static 'css/squirrel.css' %}">
-</head>
-
+{% extends 'squirrels/base.html' %}
+{% load static %}
+{% block title %}
+- All Sightings
+{% endblock %}
+{% block main %}
+<div>
 <table border="1">
     <tr><th>Age</th> <th>Count</th></tr>
 {% for a in age %}
@@ -37,4 +39,7 @@
     <tr><td>{{ a.Date }}</td><td>{{ a.total }} </td>
 {% endfor %}
 </table>
-
+</div>
+{% endblock %}
+{% block extra_footer %}
+{% endblock %}

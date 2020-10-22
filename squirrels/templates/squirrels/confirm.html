@@ -1,9 +1,9 @@
-<!doctype html>
-<html>
-    <body>
-    <a href="/sightings/add"> Add new Sighting </a> <br />
-    <a href="/sightings"> View All Sightings</a> <br />
-    <hr color="RED"/>
+{% extends 'squirrels/base.html' %}
+{% load static %}
+{% block title %}
+- All Sightings
+{% endblock %}
+{% block main %}
     <b>
         The following data {{ status }} successfully.
     </b>
@@ -17,5 +17,6 @@
      <tr><td>Age</td><td>{{sighting.Age}}</td></tr>
     </table>
 
-    </body>
-</html>
+{% endblock %}
+{% block extra_footer %}
+{% endblock %}

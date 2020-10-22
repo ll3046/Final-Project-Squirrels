@@ -55,7 +55,7 @@ def update(request):
 
 
 def add(request):
-    if request.method == "POST":
+    if request.method == "POST"  and request.POST.get('submit_id') == "Save":
         sighting = SquirrelDB()
         sighting.id = SquirrelDB.objects.aggregate(Max("id"))['id__max']
         sighting.sq_id = request.POST.get('sighting_sq_id')

@@ -1,6 +1,9 @@
-<!doctype html>
-<html>
-    <body>
+{% extends 'squirrels/base.html' %}
+{% load static %}
+{% block title %}
+- All Sightings
+{% endblock %}
+{% block main %}
     <!-- Sends request to update handler, if the user presses Update button -->
 
     <form method="POST" action="/sightings/update/">
@@ -19,3 +22,6 @@
         </form>
     </body>
 </html>
+{% endblock %}
+{% block extra_footer %}
+{% endblock %}
