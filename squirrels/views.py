@@ -55,44 +55,52 @@ def update(request):
 
 
 def add(request):
-    if request.method == "POST"  and request.POST.get('submit_id') == "Save":
-        sighting = SquirrelDB()
-        sighting.id = SquirrelDB.objects.aggregate(Max("id"))['id__max']
-        sighting.sq_id = request.POST.get('sighting_sq_id')
-        sighting.Shift = request.POST.get('Shift_id')
-        sighting.X = request.POST.get('long_id')
-        sighting.Y = request.POST.get('lat_id')
-        sighting.Lat_long = "POINT (%s %s)" % (sighting.Y, sighting.X)
-        try:
-            # parse the date with given format
-            sighting.Date = datetime.strptime(request.POST.get('Date_id'), "%b. %d, %Y")
-        except Exception as e:
-            # date parsing fails due to absence of space in between
-            sighting.Date = datetime.strptime(request.POST.get('Date_id'), "%b.%d, %Y")
-        except:
-            # Another exception - date parsing fails due to absence of space in between
-            sighting.Date = datetime.strptime(request.POST.get('Date_id'), "%b.%d,%Y")
-        sighting.Age = request.POST.get('Age_id')
-        # set all other options to random values to make sure that the data is saved.
-        sighting.Running = True
-        sighting.Chasing = True
-        sighting.Climbing = True
-        sighting.Eating = False
-        sighting.Foraging = False
-        sighting.Kuks = False
-        sighting.Quass = False
-        sighting.Moans = False
-        sighting.Approaches = False
-        sighting.Tail_flag = False
-        sighting.Tail_twitch = False
-        sighting.Indifferent = False
-        sighting.Runs_from = False
-        sighting.save()
+    if request.method == "POST" and request.POST.get('submit_id') == "Save":
+        if len(request.POST.get('Date_id')) > 0 and "." in request.POST.get('Date_id') \
+                and "," in request.POST.get('Date_id') and len(request.POST.get('sighting_sq_id')) > 0\
+                and len(request.POST.get('Shift_id')) > 0 and len(request.POST.get('long_id')) > 0 \
+                and len(request.POST.get('lat_id')) > 0:
+            sighting = SquirrelDB()
+            sighting.id = SquirrelDB.objects.aggregate(Max("id"))['id__max']
+            sighting.sq_id = request.POST.get('sighting_sq_id')
+            sighting.Shift = request.POST.get('Shift_id')
+            sighting.X = request.POST.get('long_id')
+            sighting.Y = request.POST.get('lat_id')
+            sighting.Lat_long = "POINT (%s %s)" % (sighting.Y, sighting.X)
+            try:
+                # parse the date with given format
+                sighting.Date = datetime.strptime(request.POST.get('Date_id'), "%b. %d, %Y")
+            except Exception as e:
+                # date parsing fails due to absence of space in between
+                sighting.Date = datetime.strptime(request.POST.get('Date_id'), "%b.%d, %Y")
+            except:
+                # Another exception - date parsing fails due to absence of space in between
+                sighting.Date = datetime.strptime(request.POST.get('Date_id'), "%b.%d,%Y")
+            sighting.Age = request.POST.get('Age_id')
+            # set all other options to random values to make sure that the data is saved.
+            sighting.Running = True
+            sighting.Chasing = True
+            sighting.Climbing = True
+            sighting.Eating = False
+            sighting.Foraging = False
+            sighting.Kuks = False
+            sighting.Quass = False
+            sighting.Moans = False
+            sighting.Approaches = False
+            sighting.Tail_flag = False
+            sighting.Tail_twitch = False
+            sighting.Indifferent = False
+            sighting.Runs_from = False
+            sighting.save()
 
-        # Redirects to confirmation page
-        context = {
-            'sighting': sighting, "status": "Saved"
-        }
+            # Redirects to confirmation page
+            context = {
+                'sighting': sighting, "status": "Saved"
+            }
+        else:
+            context = {
+                'sighting': "", "status": "Error"
+            }
         return render(request, 'squirrels/confirm.html', context)
     else:
         sighting = SquirrelDB()

@@ -5,9 +5,9 @@
 {% endblock %}
 {% block main %}
     <b>
-        The following data {{ status }} successfully.
-    </b>
-    <table>
+        {% if status != "Error"  %}
+            The following data {{ status }} successfully.
+            <table>
         <tr><td>Sighting ID: </td><td>{{ sighting.id }}</td></tr>
      <tr><td>Squirrel ID: </td><td>{{ sighting.sq_id }}</td></tr>
      <tr><td>Longitude</td><td>{{sighting.X}}</td></tr>
@@ -16,6 +16,11 @@
      <tr><td>Date</td><td>{{sighting.Date}}</td></tr>
      <tr><td>Age</td><td>{{sighting.Age}}</td></tr>
     </table>
+        {% else %}
+            Error saving the form.
+        {% endif %}
+    </b>
+
 
 {% endblock %}
 {% block extra_footer %}

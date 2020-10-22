@@ -5,40 +5,47 @@
 {% endblock %}
 {% block main %}
 <div>
+
+    <div style="margin-left: 10px; position: absolute; top: 50px;">
 <table border="1">
-    <tr><th>Age</th> <th>Count</th></tr>
+    <tr style="background-color: #83f7b2;"><th>Age</th> <th>Count</th></tr>
 {% for a in age %}
     <tr><td>{{ a.Age }}</td><td>{{ a.total }} </td>
 {% endfor %}
 </table>
-
+</div>
+    <div style="right: 100px; position: absolute; top: 50px;">
 <table border="1">
-    <tr><th>Shift</th> <th>Count</th></tr>
+    <tr style="background-color: #83f7b2;"><th>Shift</th> <th>Count</th></tr>
 {% for a in shift %}
     <tr><td>{{ a.Shift }}</td><td>{{ a.total }} </td>
 {% endfor %}
 </table>
-
+    </div>
+    <div style="margin-left: 10px; position: absolute; top: 250px;">
 <table border="1">
-    <tr><th>Running</th> <th>Count</th></tr>
+    <tr style="background-color: #83f7b2;"><th>Running</th> <th>Count</th></tr>
 {% for a in running %}
     <tr><td>{{ a.Running }}</td><td>{{ a.total }} </td>
 {% endfor %}
 </table>
-
+    </div>
+    <div style="right: 100px; position: absolute; top: 250px;">
 <table border="1">
-    <tr><th>Eating</th> <th>Count</th></tr>
+    <tr style="background-color: #83f7b2;"><th>Eating</th> <th>Count</th></tr>
 {% for a in eating %}
     <tr><td>{{ a.Eating }}</td><td>{{ a.total }} </td>
 {% endfor %}
 </table>
-
+    </div>
+    <div style="margin-left: 10px; position: absolute; top: 350px;">
 <table border="1">
-    <tr><th>Date</th> <th>Count</th></tr>
+    <tr style="background-color: #83f7b2;"><th>Date</th> <th>Count</th></tr>
 {% for a in date %}
     <tr><td>{{ a.Date }}</td><td>{{ a.total }} </td>
 {% endfor %}
 </table>
+    </div>
 </div>
 {% endblock %}
 {% block extra_footer %}
