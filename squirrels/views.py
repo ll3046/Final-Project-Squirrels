@@ -7,12 +7,14 @@ from django.db.models import Max
 
 from .models import SquirrelDB
 
+
 def map(request):
     sightings = SquirrelDB.objects.all().filter(Primary_color = 'Black')
     context = {
             'sightings': sightings,
     }
     return render(request, 'squirrels/map.html', context)
+
 
 def sightings(request):
     sightings = SquirrelDB.objects.all()
@@ -21,9 +23,11 @@ def sightings(request):
     }
     return render(request,'squirrels/sightings.html', context)
 
-def detail(request, sighting_id):
-    sighting = get_object_or_404(SquirrelDB, pk=sighting_id)
 
+def detail(request, sighting_id):
+    # retrieve the selected object's details, and provides an option to update the entries.
+
+    sighting = get_object_or_404(SquirrelDB, pk=sighting_id)
     context = {
             'sighting': sighting,
     }
@@ -31,8 +35,10 @@ def detail(request, sighting_id):
 
 
 def update(request):
-    sighting = SquirrelDB()
+    # check if it is GET or POST
     if request.method == "POST" and request.POST.get('submit_id') == "Update":
+        sighting_id = request.POST.get('sighting_id')
+        sighting = get_object_or_404(SquirrelDB, pk=sighting_id)
         sighting.Shift = request.POST.get('Shift_id')
         sighting.X = request.POST.get('long_id')
         sighting.Y = request.POST.get('lat_id')
@@ -55,8 +61,17 @@ def add(request):
         sighting.X = request.POST.get('long_id')
         sighting.Y = request.POST.get('lat_id')
         sighting.Lat_long = "POINT (%s %s)" % (sighting.Y, sighting.X)
-        sighting.Date = datetime.strptime(request.POST.get('Date_id'), "%b. %d, %Y")
+        try:
+            # parse the date with given format
+            sighting.Date = datetime.strptime(request.POST.get('Date_id'), "%b. %d, %Y")
+        except Exception as e:
+            # date parsing fails due to absence of space in between
+            sighting.Date = datetime.strptime(request.POST.get('Date_id'), "%b.%d, %Y")
+        except:
+            # Another exception - date parsing fails due to absence of space in between
+            sighting.Date = datetime.strptime(request.POST.get('Date_id'), "%b.%d,%Y")
         sighting.Age = request.POST.get('Age_id')
+        # set all other options to random values to make sure that the data is saved.
         sighting.Running = True
         sighting.Chasing = True
         sighting.Climbing = True
@@ -71,6 +86,8 @@ def add(request):
         sighting.Indifferent = False
         sighting.Runs_from = False
         sighting.save()
+
+        # Redirects to confirmation page
         context = {
             'sighting': sighting, "status": "Saved"
         }
@@ -80,7 +97,7 @@ def add(request):
     context = {
             'sighting': sighting,
     }
-
+    # if it is a new entry request, then page will be redirected to add entry page.
     return render(request, 'squirrels/add.html', context)
 
 

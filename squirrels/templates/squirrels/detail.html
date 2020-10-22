@@ -1,10 +1,13 @@
 <!doctype html>
 <html>
     <body>
+    <!-- Sends request to update handler, if the user presses Update button -->
+
     <form method="POST" action="/sightings/update/">
         {% csrf_token %}
     <table>
         <tr><td>Sighting ID: </td><td>{{ sighting.id }}</td></tr>
+        <input type="hidden" name="sighting_id" value="{{ sighting.id }}"/>
      <tr><td>Squirrel ID: </td><td>{{ sighting.sq_id }}</td></tr>
      <tr><td>Longitude</td><td><input type="text" name="long_id" size="50" value="{{sighting.X}}"/></td></tr>
         <tr><td>Latitude</td><td><input type="text" name="lat_id" size="50" value="{{sighting.Y}}"/></td></tr>
