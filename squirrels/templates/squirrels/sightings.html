@@ -1,6 +1,9 @@
-<!doctype html>
-<html>
-    <body>
+{% extends 'squirrels/base.html' %}
+{% load static %}
+{% block title %}
+- All Sightings
+{% endblock %}
+{% block main %}
 	<b>
 		<a href="{% url 'squirrels:add' %}">Add a new sighting</a>
 	</b>
@@ -22,5 +25,7 @@
 		</tr>
 		{% endfor %}
 	</table>
-	</body>
-</html>
+
+{% endblock %}
+{% block extra_footer %}
+{% endblock %}

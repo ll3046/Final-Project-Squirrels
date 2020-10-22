@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from datetime import datetime
 
-from django.db.models import Max
+from django.db.models import Max, Count
 
 from .models import SquirrelDB
 
@@ -28,6 +28,8 @@ def detail(request, sighting_id):
     # retrieve the selected object's details, and provides an option to update the entries.
 
     sighting = get_object_or_404(SquirrelDB, pk=sighting_id)
+
+
     context = {
             'sighting': sighting,
     }
@@ -102,4 +104,12 @@ def add(request):
 
 
 def stats(request):
-    return HttpResponse('stats page')
+    shift_count = SquirrelDB.objects.all().values('Shift').annotate(total=Count('Shift'))
+    date_count = SquirrelDB.objects.all().values('Date').annotate(total=Count('Date'))
+    age_count = SquirrelDB.objects.all().values('Age').annotate(total=Count('Age'))
+    running = SquirrelDB.objects.all().values('Running').annotate(total=Count('Running'))
+    eating = SquirrelDB.objects.all().values('Eating').annotate(total=Count('Eating'))
+    context = {
+            'shift': shift_count, 'date': date_count, 'age': age_count, 'running': running, 'eating': eating
+    }
+    return render(request, 'squirrels/stats.html', context)

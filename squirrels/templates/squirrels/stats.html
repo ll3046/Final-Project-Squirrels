@@ -1,0 +1,40 @@
+    {% load static %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/squirrel.css' %}">
+</head>
+
+<table border="1">
+    <tr><th>Age</th> <th>Count</th></tr>
+{% for a in age %}
+    <tr><td>{{ a.Age }}</td><td>{{ a.total }} </td>
+{% endfor %}
+</table>
+
+<table border="1">
+    <tr><th>Shift</th> <th>Count</th></tr>
+{% for a in shift %}
+    <tr><td>{{ a.Shift }}</td><td>{{ a.total }} </td>
+{% endfor %}
+</table>
+
+<table border="1">
+    <tr><th>Running</th> <th>Count</th></tr>
+{% for a in running %}
+    <tr><td>{{ a.Running }}</td><td>{{ a.total }} </td>
+{% endfor %}
+</table>
+
+<table border="1">
+    <tr><th>Eating</th> <th>Count</th></tr>
+{% for a in eating %}
+    <tr><td>{{ a.Eating }}</td><td>{{ a.total }} </td>
+{% endfor %}
+</table>
+
+<table border="1">
+    <tr><th>Date</th> <th>Count</th></tr>
+{% for a in date %}
+    <tr><td>{{ a.Date }}</td><td>{{ a.total }} </td>
+{% endfor %}
+</table>
+
