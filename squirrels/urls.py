@@ -5,8 +5,8 @@ from . import views
 app_name = 'squirrels'
 
 urlpatterns = [
-        path('map/',views.map),
-        path('',views.sightings),
+        path('map/',views.map, name='map'),
+        path('', views.sightings),
         path('sightings/', views.sightings, name='view'),
         path('sightings/add/',views.add, name='add'),
         path('sightings/update/', views.update, name='update'),
